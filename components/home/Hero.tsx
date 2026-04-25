@@ -68,7 +68,7 @@ function AbstractGrid() {
           </div>
 
           {[
-            { label: 'Sectors', value: '3', sub: 'Macro · Energy · A&D' },
+            { label: 'Sectors', value: '2', sub: 'TMT · Industrials' },
             { label: 'Research Status', value: 'Active', sub: 'Initiations in Progress' },
             { label: 'Coverage Model', value: 'Independent', sub: 'No external influence' },
           ].map((stat, i) => (
@@ -100,10 +100,10 @@ function AbstractGrid() {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-start overflow-hidden bg-black">
+    <section className="relative min-h-[78vh] flex items-start overflow-hidden bg-black">
       <AbstractGrid />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-10 pt-24 md:pt-36 pb-20 w-full">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-10 pt-24 md:pt-32 pb-10 w-full">
         <div className="max-w-3xl">
           <motion.div
             className="flex items-center gap-3 mb-8"
@@ -164,11 +164,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="text-[9px] tracking-[0.3em] uppercase text-white/25">Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-white/25 to-transparent" />
-      </div>
     </section>
   )
 }

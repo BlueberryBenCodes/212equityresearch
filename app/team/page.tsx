@@ -55,7 +55,7 @@ const team = [
     role: 'Analyst',
     school: 'UCF Burnett Honors College',
     degree: 'Mathematics, Finance & Engineering',
-    image: '/images/team/charles.jpeg',
+    image: '/images/team/charles.png',
     bio: 'Charles is a freshman at UCF\'s Burnett Honors College with interests spanning mathematics, finance, and engineering. His multidisciplinary curiosity makes him a sharp thinker capable of connecting quantitative rigor with real-world market dynamics.',
     focus: 'Mathematics · Macro · Engineering',
   },

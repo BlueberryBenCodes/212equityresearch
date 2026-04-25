@@ -4,6 +4,25 @@ import { useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 
+const previews = [
+  {
+    sector: 'TMT',
+    type: 'Sector Initiation',
+    title: 'Data Centers',
+    subtitle: 'Powering the Next Compute Supercycle',
+    date: 'April 2026',
+    file: '/reports/data-centers-tmt-initiation.pdf',
+  },
+  {
+    sector: 'Industrials',
+    type: 'Sector Overview',
+    title: 'Industrials',
+    subtitle: 'A First-Principles Sector Overview',
+    date: 'April 2026',
+    file: '/reports/industrials-sector-initiation.pdf',
+  },
+]
+
 export default function ReportsPreview() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
@@ -23,9 +42,9 @@ export default function ReportsPreview() {
               <span className="text-[10px] tracking-[0.22em] uppercase text-white/40">Research Library</span>
             </div>
             <h2 className="font-display font-bold text-[clamp(32px,3.5vw,50px)] leading-[1.08] tracking-[-0.025em] text-white">
-              Coverage in progress.
+              Coverage initiated.
               <br />
-              <span className="text-white/30">More coming.</span>
+              <span className="text-white/30">Two sectors live.</span>
             </h2>
           </motion.div>
           <motion.div
@@ -45,29 +64,56 @@ export default function ReportsPreview() {
           </motion.div>
         </div>
 
-        {/* Coming Soon state */}
-        <motion.div
-          className="border border-white/[0.08] p-14 flex flex-col items-center justify-center text-center"
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2 }}
-        >
-          <div className="w-10 h-10 border border-white/15 flex items-center justify-center mb-6">
-            <div className="w-3 h-3 border border-white/30" />
-          </div>
-          <div className="font-display font-semibold text-xl text-white/70 mb-2 tracking-tight">Coming Soon</div>
-          <p className="text-[13px] text-white/35 max-w-xs">
-            Research is published as coverage is initiated. Check back soon.
-          </p>
-          <div className="mt-8">
-            <Link
-              href="/reports"
-              className="text-[10px] tracking-widest uppercase text-white/40 hover:text-white/70 transition-colors border-b border-white/10 hover:border-white/30 pb-px"
+        {/* Reports grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/[0.06]">
+          {previews.map((report, i) => (
+            <motion.a
+              key={report.title}
+              href={report.file}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative bg-black p-7 md:p-9 flex flex-col justify-between min-h-[280px] overflow-hidden"
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.2 + i * 0.1 }}
             >
-              View Research Page
-            </Link>
-          </div>
-        </motion.div>
+              <div className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-7">
+                  <span className="text-[10px] tracking-[0.22em] uppercase text-white/45 border border-white/[0.15] px-2.5 py-1">
+                    {report.sector}
+                  </span>
+                  <span className="text-[10px] tracking-[0.18em] uppercase text-white/30">
+                    {report.type}
+                  </span>
+                </div>
+                <h3 className="font-display font-bold text-[clamp(24px,2.6vw,32px)] leading-[1.1] tracking-[-0.02em] text-white mb-1.5">
+                  {report.title}
+                </h3>
+                <p className="text-[13px] text-white/45 leading-snug">{report.subtitle}</p>
+              </div>
+
+              <div className="relative z-10 flex items-end justify-between mt-8 pt-5 border-t border-white/[0.07]">
+                <div className="text-[11px] text-white/45">{report.date}</div>
+                <div className="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-white/55 group-hover:text-white transition-colors">
+                  View PDF
+                  <svg
+                    className="w-3 h-3 group-hover:translate-x-0.5 transition-transform"
+                    fill="none"
+                    viewBox="0 0 12 12"
+                    stroke="currentColor"
+                    strokeWidth={1.8}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2 6h8M6 2l4 4-4 4" />
+                  </svg>
+                </div>
+              </div>
+
+              <div className="absolute bottom-0 left-0 h-px bg-white/35 w-0 group-hover:w-full transition-all duration-500" />
+            </motion.a>
+          ))}
+        </div>
       </div>
     </section>
   )

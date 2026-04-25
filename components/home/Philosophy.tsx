@@ -3,9 +3,18 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
+const logoChars = [
+  { c: '2', x: -64, y: -42, r: -14 },
+  { c: '1', x: 56, y: -58, r: 18 },
+  { c: '2', x: -48, y: 54, r: -10 },
+  { c: '°', x: 70, y: 32, r: 22 },
+]
+
 export default function Philosophy() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const logoRef = useRef<HTMLDivElement>(null)
+  const logoInView = useInView(logoRef, { once: true, margin: '-120px' })
 
   return (
     <section ref={ref} className="relative bg-black py-10 md:py-14 border-t border-white/[0.05]">
@@ -19,11 +28,57 @@ export default function Philosophy() {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center justify-center py-16 px-10"
           >
-            {/* Logo mark */}
-            <div className="border-2 border-white/80 flex items-center justify-center w-44 h-44 mb-6">
-              <span className="font-display font-bold text-6xl tracking-tighter text-white leading-none select-none">
-                212°
-              </span>
+            {/* Logo mark — animates in by drawing the four edges, then chars snap together */}
+            <div ref={logoRef} className="relative w-44 h-44 mb-6 select-none">
+              {/* Top edge */}
+              <motion.div
+                className="absolute top-0 left-0 right-0 h-[2px] bg-white/80 origin-left"
+                initial={{ scaleX: 0 }}
+                animate={logoInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.0, ease: [0.22, 1, 0.36, 1] }}
+              />
+              {/* Right edge */}
+              <motion.div
+                className="absolute top-0 right-0 bottom-0 w-[2px] bg-white/80 origin-top"
+                initial={{ scaleY: 0 }}
+                animate={logoInView ? { scaleY: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+              />
+              {/* Bottom edge */}
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/80 origin-right"
+                initial={{ scaleX: 0 }}
+                animate={logoInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
+              />
+              {/* Left edge */}
+              <motion.div
+                className="absolute top-0 left-0 bottom-0 w-[2px] bg-white/80 origin-bottom"
+                initial={{ scaleY: 0 }}
+                animate={logoInView ? { scaleY: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.54, ease: [0.22, 1, 0.36, 1] }}
+              />
+
+              {/* Characters — each starts displaced + rotated, then snaps into place */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="font-display font-bold text-6xl tracking-tighter text-white leading-none flex">
+                  {logoChars.map((ch, i) => (
+                    <motion.span
+                      key={i}
+                      className="inline-block"
+                      initial={{ x: ch.x, y: ch.y, rotate: ch.r, opacity: 0 }}
+                      animate={logoInView ? { x: 0, y: 0, rotate: 0, opacity: 1 } : {}}
+                      transition={{
+                        duration: 0.75,
+                        delay: 0.6 + i * 0.08,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                    >
+                      {ch.c}
+                    </motion.span>
+                  ))}
+                </span>
+              </div>
             </div>
             <p className="text-[11px] tracking-[0.28em] uppercase text-white/35 text-center">
               Equity Research

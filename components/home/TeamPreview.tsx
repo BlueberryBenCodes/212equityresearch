@@ -11,7 +11,7 @@ const team = [
   { name: 'Benjamin Getter', school: 'UNC Kenan-Flagler', image: '/images/team/ben.jpeg' },
   { name: 'Michael Cochran', school: 'Ohio State · Fisher', image: '/images/team/michael.jpeg' },
   { name: 'Daniel Rudin', school: 'Emory University', image: '/images/team/daniel.jpeg' },
-  { name: 'Charles Alliots', school: 'UCF Burnett Honors', image: '/images/team/charles.jpeg' },
+  { name: 'Charles Alliots', school: 'UCF Burnett Honors', image: '/images/team/charles.png' },
 ]
 
 export default function TeamPreview() {

@@ -24,7 +24,7 @@ const standards = [
 
 const stats = [
   { value: '6', label: 'Team Members', sub: 'Across 4 universities' },
-  { value: '3', label: 'Sectors', sub: 'Macro · Energy · A&D' },
+  { value: '2', label: 'Sectors', sub: 'TMT · Industrials' },
   { value: '100%', label: 'Independent', sub: 'No external influence' },
   { value: '1°', label: 'The Standard', sub: 'Where it matters most' },
 ]
